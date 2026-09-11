@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Schnelle Scratch-zu-HTML-Konvertierung mit TurboWarp – optimiert für GitHub Pages.">
+  <meta name="theme-color" content="#0b1020">
+  <title>TurboPack — Scratch → HTML</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <style>
+    :root{
+      --bg:#070b16;--panel:rgba(15,23,42,.78);--panel-strong:#111a2e;--text:#eef2ff;--muted:#9aa7c0;
+      --line:rgba(255,255,255,.10);--accent:#7c5cff;--accent2:#27d3a2;--shadow:0 24px 80px rgba(0,0,0,.35);--radius:24px
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:
+      radial-gradient(800px 500px at 12% -5%,rgba(124,92,255,.28),transparent 60%),
+      radial-gradient(760px 520px at 90% 12%,rgba(39,211,162,.18),transparent 62%),var(--bg)}
+    a{color:inherit}
+    .wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}
+    header{padding:26px 0 10px}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.03em;text-decoration:none}
+    .brand-mark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),#a996ff);box-shadow:0 10px 30px rgba(124,92,255,.30)}
+    .brand-mark svg{width:23px;height:23px}
+    .nav-right{display:flex;align-items:center;gap:10px}
+    .pill{padding:9px 13px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04);color:#c8d1e5;font-size:13px}
+    .hero{padding:74px 0 34px;text-align:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:#d8d3ff;background:rgba(124,92,255,.12);border:1px solid rgba(124,92,255,.25);padding:8px 12px;border-radius:999px;font-size:13px;font-weight:700}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);box-shadow:0 0 12px var(--accent2)}
+    h1{margin:18px auto 14px;max-width:850px;font-size:clamp(42px,7vw,76px);line-height:.98;letter-spacing:-.055em}
+    .gradient{background:linear-gradient(110deg,#fff 15%,#bfc8ff 52%,#8bffdc);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero p{margin:0 auto;max-width:720px;color:var(--muted);font-size:18px;line-height:1.65}
+    .mini-stats{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:24px 0 12px}
+    .stat{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:#cfd7e8;font-size:13px}
+    main{padding:24px 0 64px}
+    .app-card{background:linear-gradient(180deg,rgba(17,26,46,.82),rgba(9,14,28,.82));border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow);overflow:hidden;backdrop-filter:blur(16px)}
+    .app-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;border-bottom:1px solid var(--line)}
+    .app-title{display:flex;align-items:center;gap:11px;font-weight:800}
+    .engine{font-size:12px;padding:7px 10px;border-radius:10px;background:rgba(39,211,162,.09);color:#9effdd;border:1px solid rgba(39,211,162,.18)}
+    .open-btn{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;text-decoration:none;padding:10px 13px;border-radius:11px;font-weight:700;font-size:13px}
+    .open-btn:hover{background:rgba(255,255,255,.10)}
+    .frame-wrap{padding:14px;background:#050811}
+    iframe{display:block;width:100%;height:min(820px,80vh);min-height:650px;border:0;border-radius:18px;background:#0b1020}
+    .help{padding:30px 24px 36px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .help-card{padding:20px;border:1px solid var(--line);background:rgba(255,255,255,.025);border-radius:18px}
+    .help-card h3{margin:0 0 8px;font-size:15px}
+    .help-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+    footer{padding:0 0 42px;color:#7f8ba6;font-size:12px;text-align:center}
+    footer a{color:#aab4ca;text-underline-offset:3px}
+    @media (max-width:800px){.help{grid-template-columns:1fr}.hero{padding-top:48px}.app-head{align-items:flex-start}.engine{display:none}.open-btn{white-space:nowrap}iframe{min-height:660px;height:82vh}}
+    @media (max-width:520px){.wrap{width:min(100% - 20px,1180px)}header{padding-top:16px}.hero p{font-size:16px}.nav-right .pill{display:none}.app-head{padding:14px}.frame-wrap{padding:8px}iframe{min-height:680px;border-radius:14px}.help{padding:20px 14px 26px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="TurboPack Startseite">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2 4.5 13h5L8 22l8.5-12h-5L13 2Z" fill="white" stroke="none"/>
+          </svg>
+        </span>
+        <span>TurboPack</span>
+      </a>
+      <div class="nav-right">
+        <span class="pill">GitHub Pages ready</span>
+        <a class="open-btn" href="https://packager.turbowarp.org/" target="_blank" rel="noopener">TurboWarp ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <div id="top"></div>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow"><span class="dot"></span> Scratch → HTML im Browser</span>
+      <h1>Dein Scratch-Projekt.<br><span class="gradient">Eine fertige HTML-Datei.</span></h1>
+      <p>Ziehe deine <strong>.sb3</strong>-Datei in den TurboWarp Packager, stelle die gewünschten Optionen ein und lade dein fertiges HTML direkt herunter.</p>
+      <div class="mini-stats" aria-label="Produktvorteile">
+        <span class="stat">⚡ Schnell durch TurboWarp</span>
+        <span class="stat">🔒 Keine eigene Backend-Instanz</span>
+        <span class="stat">🌐 GitHub Pages kompatibel</span>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="wrap">
+      <section class="app-card" aria-label="TurboWarp Packager">
+        <div class="app-head">
+          <div class="app-title">TurboWarp Packager <span class="engine">Engine: TurboWarp</span></div>
+          <a class="open-btn" href="https://packager.turbowarp.org/" target="_blank" rel="noopener">In neuem Tab öffnen</a>
+        </div>
+        <div class="frame-wrap">
+          <iframe
+            title="TurboWarp Packager"
+            src="https://packager.turbowarp.org/"
+            loading="eager"
+            allow="fullscreen; clipboard-read; clipboard-write; microphone; camera"
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+        </div>
+        <div class="help">
+          <article class="help-card">
+            <h3>1. Datei auswählen</h3>
+            <p>Lade eine Scratch-3-Projektdatei (.sb3) im eingebetteten Packager hoch oder ziehe sie hinein.</p>
+          </article>
+          <article class="help-card">
+            <h3>2. Optionen prüfen</h3>
+            <p>Wähle Ausgabe, Größe und weitere TurboWarp-Optionen passend für dein Projekt.</p>
+          </article>
+          <article class="help-card">
+            <h3>3. HTML herunterladen</h3>
+            <p>Starte das Packaging und erhalte deine fertige HTML-Datei für Website, Download oder Offline-Nutzung.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">TurboPack ist eine eigenständige Oberfläche und nutzt den offiziellen <a href="https://turbowarp.org/" target="_blank" rel="noopener">TurboWarp</a> Packager.</div>
+  </footer>
+</body>
+</html>
